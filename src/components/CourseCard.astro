@@ -1,0 +1,123 @@
+---
+export interface Props {
+  course: {
+    id: string;
+    title: string;
+    price: number;
+    originalPrice?: number;
+    duration: string;
+    level: string;
+    students: number;
+    instructor: string;
+    image: string;
+    description: string;
+    features: string[];
+    isFree?: boolean;
+  };
+}
+
+const { course } = Astro.props;
+---
+
+<div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden group">
+  <!-- Course Image -->
+  <div class="relative h-48 overflow-hidden">
+    <img 
+      src={course.image} 
+      alt={course.title}
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+    />
+    <div class="absolute top-4 left-4">
+      <span class={`px-3 py-1 text-xs font-semibold rounded-full ${
+        course.level === 'Beginner' ? 'bg-green-100 text-green-800' :
+        course.level === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
+        'bg-red-100 text-red-800'
+      }`}>
+        {course.level}
+      </span>
+    </div>
+    {course.isFree && (
+      <div class="absolute top-4 right-4">
+        <span class="bg-accent-500 text-white px-3 py-1 text-xs font-semibold rounded-full">
+          FREE
+        </span>
+      </div>
+    )}
+  </div>
+
+  <!-- Course Content -->
+  <div class="p-6">
+    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+      {course.title}
+    </h3>
+    <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+      {course.description}
+    </p>
+
+    <!-- Course Info -->
+    <div class="flex items-center justify-between mb-4 text-sm text-gray-500">
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>{course.duration}</span>
+        </div>
+        <div class="flex items-center space-x-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+          </svg>
+          <span>{course.students} students</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructor -->
+    <div class="flex items-center space-x-2 mb-4">
+      <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
+        <span class="text-white text-sm font-semibold">
+          {course.instructor.charAt(0)}
+        </span>
+      </div>
+      <span class="text-sm text-gray-600">By {course.instructor}</span>
+    </div>
+
+    <!-- Features -->
+    <div class="space-y-2 mb-6">
+      {course.features.slice(0, 3).map(feature => (
+        <div class="flex items-center space-x-2 text-sm text-gray-600">
+          <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>{feature}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Price and CTA -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        {course.isFree ? (
+          <span class="text-2xl font-bold text-green-600">Free</span>
+        ) : (
+          <>
+            <span class="text-2xl font-bold text-primary-600">
+              PKR {course.price.toLocaleString()}
+            </span>
+            {course.originalPrice && (
+              <span class="text-sm text-gray-500 line-through">
+                PKR {course.originalPrice.toLocaleString()}
+              </span>
+            )}
+          </>
+        )}
+      </div>
+      <a 
+        href={`/courses/${course.id}`}
+        class="bg-primary-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+      >
+        View Details
+      </a>
+    </div>
+  </div>
+</div>

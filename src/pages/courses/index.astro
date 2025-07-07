@@ -1,0 +1,194 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import Footer from '../../components/Footer.astro';
+import { courses } from '../../data/courses.js';
+---
+
+<Layout title="All Courses - LbisTech Training">
+  <Header />
+  <main class="pt-20">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-20">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Professional <span class="text-primary-600">Training Courses</span>
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            Master cloud computing and DevOps with our comprehensive certification courses designed for career growth
+          </p>
+          
+          <!-- Search and Filter -->
+          <div class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto mb-12">
+            <div class="flex-1">
+              <input 
+                type="search" 
+                placeholder="Search courses..."
+                class="w-full px-6 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                id="course-search"
+              />
+            </div>
+            <select 
+              class="px-6 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              id="level-filter"
+            >
+              <option value="">All Levels</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="courses-grid">
+          {courses.map(course => (
+            <CourseCard course={course} />
+          ))}
+        </div>
+        
+        <!-- No Results Message -->
+        <div id="no-results" class="hidden text-center py-12">
+          <div class="text-6xl mb-4">🔍</div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-2">No courses found</h3>
+          <p class="text-gray-600">Try adjusting your search or filter criteria</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Our Courses -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">Why Choose Our Courses?</h2>
+          <p class="text-xl text-gray-600">
+            Our training programs are designed by industry experts to provide you with practical skills and certifications
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Industry-Recognized</h3>
+            <p class="text-gray-600">All our courses lead to globally recognized certifications from AWS, Microsoft, and other top providers.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+            <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Practical Learning</h3>
+            <p class="text-gray-600">Learn by doing with hands-on labs, real-world projects, and practical exercises.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+            <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Expert Instructors</h3>
+            <p class="text-gray-600">Learn from certified professionals with years of industry experience and practical knowledge.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Search and filter functionality
+  const searchInput = document.getElementById('course-search');
+  const levelFilter = document.getElementById('level-filter');
+  const coursesGrid = document.getElementById('courses-grid');
+  const noResults = document.getElementById('no-results');
+  
+  const courses = [
+    {
+      title: 'AWS 2 In 1 (Solutions Architect & Developer Associate)',
+      level: 'Intermediate',
+      element: coursesGrid?.children[0]
+    },
+    {
+      title: 'DevOps Engineering',
+      level: 'Advanced',
+      element: coursesGrid?.children[1]
+    },
+    {
+      title: 'Azure 2 In 1 (AZ-900 & AZ-104)',
+      level: 'Beginner',
+      element: coursesGrid?.children[2]
+    },
+    {
+      title: 'Linux Deep Dive',
+      level: 'Intermediate',
+      element: coursesGrid?.children[3]
+    },
+    {
+      title: 'Kubernetes',
+      level: 'Intermediate',
+      element: coursesGrid?.children[4]
+    },
+    {
+      title: 'Docker',
+      level: 'Beginner',
+      element: coursesGrid?.children[5]
+    },
+    {
+      title: 'Ansible',
+      level: 'Intermediate',
+      element: coursesGrid?.children[6]
+    },
+    {
+      title: 'Jenkins',
+      level: 'Intermediate',
+      element: coursesGrid?.children[7]
+    },
+    {
+      title: 'Open Source VoIP',
+      level: 'Beginner',
+      element: coursesGrid?.children[8]
+    }
+  ];
+
+  function filterCourses() {
+    const searchTerm = searchInput?.value.toLowerCase() || '';
+    const selectedLevel = levelFilter?.value || '';
+    
+    let visibleCount = 0;
+    
+    courses.forEach(course => {
+      const matchesSearch = course.title.toLowerCase().includes(searchTerm);
+      const matchesLevel = !selectedLevel || course.level === selectedLevel;
+      
+      if (matchesSearch && matchesLevel) {
+        course.element?.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        course.element?.classList.add('hidden');
+      }
+    });
+    
+    if (visibleCount === 0) {
+      noResults?.classList.remove('hidden');
+    } else {
+      noResults?.classList.add('hidden');
+    }
+  }
+
+  searchInput?.addEventListener('input', filterCourses);
+  levelFilter?.addEventListener('change', filterCourses);
+</script>

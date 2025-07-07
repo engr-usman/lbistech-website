@@ -1,0 +1,263 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import CourseCard from '../components/CourseCard.astro';
+import Footer from '../components/Footer.astro';
+import { courses } from '../data/courses.js';
+
+const featuredCourses = courses.slice(0, 6);
+---
+
+<Layout title="LbisTech - Pakistan's Leading AWS & DevOps Training Provider">
+  <Header />
+  <main>
+    <Hero />
+    
+    <!-- About Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">
+            Why Choose <span class="text-primary-600">LbisTech</span>?
+          </h2>
+          <p class="text-xl text-gray-600">
+            We're Pakistan's leading AWS and DevOps certification training provider, committed to transforming careers through industry-recognized certifications and hands-on learning.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Live Weekend Sessions</h3>
+            <p class="text-gray-600">Interactive live sessions every weekend with expert instructors and real-time doubt resolution.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow text-center">
+            <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">24/7 Community Support</h3>
+            <p class="text-gray-600">Join our active WhatsApp community for continuous learning and peer support.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow text-center">
+            <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Hands-on Labs</h3>
+            <p class="text-gray-600">Practice with real cloud environments and access to recorded lab sessions for lifetime learning.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Lifetime Access</h3>
+            <p class="text-gray-600">Get lifetime access to course materials, updates, and community support for continuous learning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Courses -->
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">Featured Courses</h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Discover our most popular courses designed to boost your career in cloud computing and DevOps
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredCourses.map(course => (
+            <CourseCard course={course} />
+          ))}
+        </div>
+
+        <div class="text-center mt-12">
+          <a href="/courses" class="bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-700 transition-colors inline-flex items-center space-x-2">
+            <span>View All Courses</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="py-20 bg-primary-600 text-white">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-5xl font-bold mb-4">5000+</div>
+            <div class="text-xl font-medium">Students Trained</div>
+            <div class="text-primary-200 mt-2">Across Pakistan and globally</div>
+          </div>
+          <div>
+            <div class="text-5xl font-bold mb-4">95%</div>
+            <div class="text-xl font-medium">Success Rate</div>
+            <div class="text-primary-200 mt-2">In certification exams</div>
+          </div>
+          <div>
+            <div class="text-5xl font-bold mb-4">9</div>
+            <div class="text-xl font-medium">Expert Courses</div>
+            <div class="text-primary-200 mt-2">Industry-recognized programs</div>
+          </div>
+          <div>
+            <div class="text-5xl font-bold mb-4">50+</div>
+            <div class="text-xl font-medium">Corporate Clients</div>
+            <div class="text-primary-200 mt-2">Trust our training</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">What Our Students Say</h2>
+          <p class="text-xl text-gray-600">Real feedback from professionals who transformed their careers with LbisTech</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="flex items-center mb-4">
+              <div class="flex text-yellow-400">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-600 mb-6">
+              "The AWS course was exceptional! The hands-on labs and real-world scenarios helped me pass my certification on the first attempt. The instructors are incredibly knowledgeable."
+            </p>
+            <div class="flex items-center">
+              <img class="w-12 h-12 rounded-full mr-4" src="https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Student" />
+              <div>
+                <div class="font-semibold text-gray-900">Ahmad Ali</div>
+                <div class="text-sm text-gray-600">Cloud Engineer, TechCorp</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="flex items-center mb-4">
+              <div class="flex text-yellow-400">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-600 mb-6">
+              "DevOps course completely transformed my career. The practical approach and community support made all the difference. I got promoted within 3 months of completing the course!"
+            </p>
+            <div class="flex items-center">
+              <img class="w-12 h-12 rounded-full mr-4" src="https://images.pexels.com/photos/7688337/pexels-photo-7688337.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Student" />
+              <div>
+                <div class="font-semibold text-gray-900">Sarah Khan</div>
+                <div class="text-sm text-gray-600">DevOps Engineer, InnovateTech</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <div class="flex items-center mb-4">
+              <div class="flex text-yellow-400">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-600 mb-6">
+              "The Azure course was comprehensive and well-structured. The instructors are industry experts and the practical labs gave me confidence to work with Azure in production."
+            </p>
+            <div class="flex items-center">
+              <img class="w-12 h-12 rounded-full mr-4" src="https://images.pexels.com/photos/7688338/pexels-photo-7688338.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Student" />
+              <div>
+                <div class="font-semibold text-gray-900">Hassan Ahmed</div>
+                <div class="text-sm text-gray-600">Solution Architect, GlobalTech</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-20 bg-primary-600 text-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-4xl font-bold mb-6">Stay Updated</h2>
+          <p class="text-xl text-primary-100 mb-8">
+            Subscribe to our newsletter for latest course updates, industry insights, and exclusive offers
+          </p>
+          <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="Enter your email"
+              class="flex-1 px-6 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
+              required
+            />
+            <button 
+              type="submit"
+              class="bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
