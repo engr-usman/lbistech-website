@@ -1,0 +1,293 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Admin Dashboard - LbisTech">
+  <Header />
+  <main class="pt-20">
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <h1 class="text-3xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
+          
+          <!-- Stats Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 7.89a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-600">Contact Forms</p>
+                  <p class="text-2xl font-bold text-gray-900" id="contact-count">-</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-600">Enrollments</p>
+                  <p class="text-2xl font-bold text-gray-900" id="enrollment-count">-</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-600">Pending</p>
+                  <p class="text-2xl font-bold text-gray-900" id="pending-count">-</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-600">Today</p>
+                  <p class="text-2xl font-bold text-gray-900" id="today-count">-</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Tabs -->
+          <div class="bg-white rounded-lg shadow-lg">
+            <div class="border-b border-gray-200">
+              <nav class="-mb-px flex space-x-8 px-6">
+                <button class="tab-button active py-4 px-1 border-b-2 border-blue-500 font-medium text-sm text-blue-600" data-tab="contact">
+                  Contact Forms
+                </button>
+                <button class="tab-button py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="enrollment">
+                  Enrollments
+                </button>
+              </nav>
+            </div>
+            
+            <!-- Contact Forms Tab -->
+            <div id="contact-tab" class="tab-content p-6">
+              <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course Interest</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="contact-table-body" class="bg-white divide-y divide-gray-200">
+                    <!-- Data will be loaded here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            <!-- Enrollments Tab -->
+            <div id="enrollment-tab" class="tab-content p-6 hidden">
+              <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="enrollment-table-body" class="bg-white divide-y divide-gray-200">
+                    <!-- Data will be loaded here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import { getContactSubmissions, getEnrollmentSubmissions, updateSubmissionStatus } from '../../lib/supabase'
+  
+  document.addEventListener('DOMContentLoaded', async function() {
+    // Tab functionality
+    const tabButtons = document.querySelectorAll('.tab-button')
+    const tabContents = document.querySelectorAll('.tab-content')
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tabName = button.getAttribute('data-tab')
+        
+        // Update button states
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active', 'border-blue-500', 'text-blue-600')
+          btn.classList.add('border-transparent', 'text-gray-500')
+        })
+        button.classList.add('active', 'border-blue-500', 'text-blue-600')
+        button.classList.remove('border-transparent', 'text-gray-500')
+        
+        // Update content visibility
+        tabContents.forEach(content => {
+          content.classList.add('hidden')
+        })
+        document.getElementById(`${tabName}-tab`).classList.remove('hidden')
+      })
+    })
+    
+    // Load data
+    await loadDashboardData()
+  })
+  
+  async function loadDashboardData() {
+    try {
+      // Load contact submissions
+      const contactSubmissions = await getContactSubmissions()
+      const enrollmentSubmissions = await getEnrollmentSubmissions()
+      
+      // Update stats
+      document.getElementById('contact-count').textContent = contactSubmissions.length
+      document.getElementById('enrollment-count').textContent = enrollmentSubmissions.length
+      
+      const pendingCount = enrollmentSubmissions.filter(e => e.status === 'pending').length
+      document.getElementById('pending-count').textContent = pendingCount
+      
+      const today = new Date().toDateString()
+      const todayCount = [...contactSubmissions, ...enrollmentSubmissions]
+        .filter(item => new Date(item.created_at).toDateString() === today).length
+      document.getElementById('today-count').textContent = todayCount
+      
+      // Populate tables
+      populateContactTable(contactSubmissions)
+      populateEnrollmentTable(enrollmentSubmissions)
+      
+    } catch (error) {
+      console.error('Error loading dashboard data:', error)
+    }
+  }
+  
+  function populateContactTable(submissions) {
+    const tbody = document.getElementById('contact-table-body')
+    tbody.innerHTML = submissions.map(submission => `
+      <tr>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          ${submission.first_name} ${submission.last_name}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${submission.email}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${submission.course_interest || 'General'}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(submission.status)}">
+            ${submission.status}
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${new Date(submission.created_at).toLocaleDateString()}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <button onclick="viewSubmission('contact', '${submission.id}')" class="text-blue-600 hover:text-blue-900 mr-3">View</button>
+          <button onclick="updateStatus('contact_submissions', '${submission.id}', 'resolved')" class="text-green-600 hover:text-green-900">Mark Resolved</button>
+        </td>
+      </tr>
+    `).join('')
+  }
+  
+  function populateEnrollmentTable(submissions) {
+    const tbody = document.getElementById('enrollment-table-body')
+    tbody.innerHTML = submissions.map(submission => `
+      <tr>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          ${submission.first_name} ${submission.last_name}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${submission.email}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${submission.course_id}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${submission.is_free ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
+            ${submission.is_free ? 'Free' : 'Paid'}
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(submission.status)}">
+            ${submission.status}
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          ${new Date(submission.created_at).toLocaleDateString()}
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <button onclick="viewSubmission('enrollment', '${submission.id}')" class="text-blue-600 hover:text-blue-900 mr-3">View</button>
+          <button onclick="updateStatus('enrollment_submissions', '${submission.id}', 'enrolled')" class="text-green-600 hover:text-green-900">Enroll</button>
+        </td>
+      </tr>
+    `).join('')
+  }
+  
+  function getStatusColor(status) {
+    switch (status) {
+      case 'new':
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-800'
+      case 'in_progress':
+      case 'payment_pending':
+        return 'bg-blue-100 text-blue-800'
+      case 'resolved':
+      case 'enrolled':
+        return 'bg-green-100 text-green-800'
+      case 'closed':
+      case 'cancelled':
+        return 'bg-gray-100 text-gray-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
+    }
+  }
+  
+  window.viewSubmission = function(type, id) {
+    // Implement view submission modal
+    alert(`View ${type} submission: ${id}`)
+  }
+  
+  window.updateStatus = async function(table, id, status) {
+    try {
+      await updateSubmissionStatus(table, id, status)
+      await loadDashboardData() // Reload data
+      alert('Status updated successfully!')
+    } catch (error) {
+      console.error('Error updating status:', error)
+      alert('Error updating status')
+    }
+  }
+</script>

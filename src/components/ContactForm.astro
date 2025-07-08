@@ -1,0 +1,170 @@
+---
+import { submitContactForm } from '../lib/supabase'
+---
+
+<div class="bg-white p-8 rounded-2xl shadow-lg">
+  <h2 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+  <form class="space-y-6" id="contact-form">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+        <input 
+          type="text" 
+          id="firstName"
+          name="firstName"
+          required
+          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        />
+      </div>
+      <div>
+        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+        <input 
+          type="text" 
+          id="lastName"
+          name="lastName"
+          required
+          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        />
+      </div>
+    </div>
+    
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+      <input 
+        type="email" 
+        id="email"
+        name="email"
+        required
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+      />
+    </div>
+    
+    <div>
+      <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+      <input 
+        type="tel" 
+        id="phone"
+        name="phone"
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+      />
+    </div>
+    
+    <div>
+      <label for="course" class="block text-sm font-medium text-gray-700 mb-2">Course of Interest</label>
+      <select 
+        id="course"
+        name="course"
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+      >
+        <option value="">Select a course</option>
+        <option value="aws-2-in-1">AWS 2 In 1</option>
+        <option value="devops-engineering">DevOps Engineering</option>
+        <option value="azure-2-in-1">Azure 2 In 1</option>
+        <option value="linux-deep-dive">Linux Deep Dive</option>
+        <option value="kubernetes">Kubernetes</option>
+        <option value="docker">Docker</option>
+        <option value="ansible">Ansible</option>
+        <option value="jenkins">Jenkins</option>
+        <option value="open-source-voip">Open Source VoIP</option>
+        <option value="general">General Inquiry</option>
+      </select>
+    </div>
+    
+    <div>
+      <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+      <textarea 
+        id="message"
+        name="message"
+        rows="4"
+        required
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        placeholder="Tell us about your background and what you'd like to learn..."
+      ></textarea>
+    </div>
+    
+    <button 
+      type="submit"
+      class="w-full bg-primary-600 text-white py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+    >
+      Send Message
+    </button>
+  </form>
+  
+  <!-- Success/Error Messages -->
+  <div id="form-message" class="hidden mt-4 p-4 rounded-lg"></div>
+</div>
+
+<script>
+  import { submitContactForm } from '../lib/supabase'
+  
+  // Contact form handling with Supabase database storage
+  const contactForm = document.getElementById('contact-form');
+  const formMessage = document.getElementById('form-message');
+  
+  contactForm?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData);
+    
+    // Basic validation
+    if (!data.firstName || !data.lastName || !data.email || !data.message) {
+      showMessage('Please fill in all required fields.', 'error');
+      return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      showMessage('Please enter a valid email address.', 'error');
+      return;
+    }
+    
+    // Show loading state
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Sending...';
+    submitBtn.disabled = true;
+    
+    try {
+      // Store in Supabase database
+      const result = await submitContactForm({
+        first_name: data.firstName,
+        last_name: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        course_interest: data.course,
+        message: data.message
+      });
+      
+      if (result.success) {
+        showMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
+        contactForm.reset();
+      } else {
+        throw new Error(result.error || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showMessage('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+    } finally {
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+  
+  function showMessage(message, type) {
+    formMessage.className = `mt-4 p-4 rounded-lg ${
+      type === 'success' 
+        ? 'bg-green-50 border border-green-200 text-green-800' 
+        : 'bg-red-50 border border-red-200 text-red-800'
+    }`;
+    formMessage.textContent = message;
+    formMessage.classList.remove('hidden');
+    
+    // Hide message after 5 seconds
+    setTimeout(() => {
+      formMessage.classList.add('hidden');
+    }, 5000);
+  }
+</script>

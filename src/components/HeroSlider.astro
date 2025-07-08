@@ -1,0 +1,290 @@
+---
+const slides = [
+  {
+    id: 1,
+    title: "Master AWS & DevOps Certification",
+    subtitle: "Pakistan's leading training provider offering comprehensive AWS and DevOps certification courses",
+    description: "Join 5000+ professionals who have advanced their careers with our expert-led training programs",
+    image: "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    ctaPrimary: "View All Courses",
+    ctaSecondary: "Get Free Consultation",
+    stats: [
+      { value: "5000+", label: "Students Trained" },
+      { value: "95%", label: "Success Rate" },
+      { value: "9", label: "Expert Courses" }
+    ]
+  },
+  {
+    id: 2,
+    title: "Cloud Computing Excellence",
+    subtitle: "Transform your career with industry-recognized cloud certifications",
+    description: "Learn from certified professionals with hands-on labs and real-world projects",
+    image: "https://images.pexels.com/photos/7688674/pexels-photo-7688674.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    ctaPrimary: "AWS Courses",
+    ctaSecondary: "Azure Training",
+    stats: [
+      { value: "24/7", label: "Community Support" },
+      { value: "Live", label: "Weekend Sessions" },
+      { value: "100%", label: "Hands-on Labs" }
+    ]
+  },
+  {
+    id: 3,
+    title: "DevOps Engineering Mastery",
+    subtitle: "Complete DevOps pipeline training with modern tools and practices",
+    description: "Master Docker, Kubernetes, Jenkins, Ansible and more with practical implementation",
+    image: "https://images.pexels.com/photos/7688337/pexels-photo-7688337.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    ctaPrimary: "DevOps Course",
+    ctaSecondary: "View Curriculum",
+    stats: [
+      { value: "8", label: "DevOps Tools" },
+      { value: "Real", label: "Projects" },
+      { value: "Expert", label: "Mentorship" }
+    ]
+  },
+  {
+    id: 4,
+    title: "Free VoIP Training Available",
+    subtitle: "Learn Open Source VoIP technologies completely free",
+    description: "Complete Asterisk and FreePBX training with YouTube playlist and certification",
+    image: "https://images.pexels.com/photos/7688343/pexels-photo-7688343.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    ctaPrimary: "Enroll Free",
+    ctaSecondary: "Watch Videos",
+    stats: [
+      { value: "FREE", label: "Course" },
+      { value: "Video", label: "Training" },
+      { value: "Certificate", label: "Included" }
+    ]
+  }
+];
+---
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50"></div>
+  
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.5) 1px, transparent 0); background-size: 40px 40px;"></div>
+  </div>
+
+  <!-- Floating Elements -->
+  <div class="absolute top-20 left-10 w-20 h-20 bg-primary-200 rounded-full opacity-20 animate-bounce-light"></div>
+  <div class="absolute top-40 right-20 w-16 h-16 bg-secondary-200 rounded-full opacity-20 animate-bounce-light" style="animation-delay: 1s;"></div>
+  <div class="absolute bottom-40 left-20 w-12 h-12 bg-accent-200 rounded-full opacity-20 animate-bounce-light" style="animation-delay: 2s;"></div>
+
+  <!-- Slider Container -->
+  <div class="relative z-10 container mx-auto px-4 py-20">
+    <div class="slider-container" id="hero-slider">
+      {slides.map((slide, index) => (
+        <div class={`slide ${index === 0 ? 'active' : ''}`} data-slide={index}>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Content -->
+            <div class="space-y-8 animate-fade-in">
+              <div class="space-y-4">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                  {slide.title.split(' ').map((word, i) => {
+                    if (word === 'AWS' || word === 'DevOps' || word === 'Cloud' || word === 'VoIP') {
+                      return <span class="text-primary-600">{word} </span>;
+                    } else if (word === 'Certification' || word === 'Excellence' || word === 'Mastery' || word === 'Free') {
+                      return <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">{word} </span>;
+                    }
+                    return word + ' ';
+                  })}
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl">
+                  {slide.subtitle}
+                </p>
+                <p class="text-lg text-gray-500 max-w-2xl">
+                  {slide.description}
+                </p>
+              </div>
+
+              <!-- Stats -->
+              <div class="grid grid-cols-3 gap-4 py-6">
+                {slide.stats.map(stat => (
+                  <div class="text-center">
+                    <div class="text-3xl font-bold text-primary-600">{stat.value}</div>
+                    <div class="text-sm text-gray-600">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <!-- CTA Buttons -->
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href="/courses" class="bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center">
+                  {slide.ctaPrimary}
+                </a>
+                <a href="/contact" class="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-primary-50 transition-all duration-300 text-center">
+                  {slide.ctaSecondary}
+                </a>
+              </div>
+
+              <!-- Features -->
+              <div class="flex flex-wrap gap-4 pt-4">
+                <div class="flex items-center space-x-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-sm font-medium">Live Weekend Sessions</span>
+                </div>
+                <div class="flex items-center space-x-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-sm font-medium">24/7 Community Support</span>
+                </div>
+                <div class="flex items-center space-x-2 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span class="text-sm font-medium">Hands-on Labs</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="relative animate-slide-up">
+              <div class="relative z-10 bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
+                <img 
+                  src={slide.image} 
+                  alt={slide.title}
+                  class="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Slider Navigation -->
+    <div class="flex justify-center mt-12 space-x-4">
+      <!-- Dots -->
+      <div class="flex space-x-2" id="slider-dots">
+        {slides.map((_, index) => (
+          <button 
+            class={`w-3 h-3 rounded-full transition-all duration-300 ${index === 0 ? 'bg-primary-600 w-8' : 'bg-gray-300 hover:bg-primary-400'}`}
+            data-slide={index}
+          ></button>
+        ))}
+      </div>
+      
+      <!-- Navigation Arrows -->
+      <div class="flex space-x-2 ml-8">
+        <button id="prev-slide" class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button id="next-slide" class="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.getElementById('hero-slider');
+    const slides = slider?.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('#slider-dots button');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
+    
+    let currentSlide = 0;
+    const totalSlides = slides?.length || 0;
+    
+    function showSlide(index) {
+      // Hide all slides
+      slides?.forEach(slide => {
+        slide.classList.remove('active');
+      });
+      
+      // Update dots
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove('bg-gray-300', 'hover:bg-primary-400', 'w-3');
+          dot.classList.add('bg-primary-600', 'w-8');
+        } else {
+          dot.classList.remove('bg-primary-600', 'w-8');
+          dot.classList.add('bg-gray-300', 'hover:bg-primary-400', 'w-3');
+        }
+      });
+      
+      // Show current slide
+      if (slides && slides[index]) {
+        slides[index].classList.add('active');
+      }
+      
+      currentSlide = index;
+    }
+    
+    function nextSlide() {
+      const next = (currentSlide + 1) % totalSlides;
+      showSlide(next);
+    }
+    
+    function prevSlide() {
+      const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(prev);
+    }
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showSlide(index));
+    });
+    
+    // Arrow navigation
+    nextBtn?.addEventListener('click', nextSlide);
+    prevBtn?.addEventListener('click', prevSlide);
+    
+    // Auto-play slider
+    setInterval(nextSlide, 5000);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    });
+  });
+</script>
+
+<style>
+  .slider-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .slide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .slide.active {
+    display: block;
+    opacity: 1;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
