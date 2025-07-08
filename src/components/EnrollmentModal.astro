@@ -250,8 +250,26 @@ const { courseId, courseTitle, isFree = false } = Astro.props;
       submitBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...';
       submitBtn.disabled = true;
       
-      // Simulate API call
-      setTimeout(() => {
+      try {
+        // Import Supabase function
+        const { submitEnrollmentForm } = await import('../lib/supabase');
+        
+        // Store enrollment data in Supabase database
+        const result = await submitEnrollmentForm({
+          course_id: data.courseId,
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          experience_level: data.experience,
+          learning_goals: data.goals,
+          is_free: data.isFree === 'true'
+        });
+        
+        if (!result.success) {
+          throw new Error(result.error || 'Failed to process enrollment');
+        }
+        
         if (data.isFree === 'true') {
           alert(`🎉 Congratulations! You've successfully enrolled in the ${data.courseId} course.\n\nYou now have access to:\n• Complete video training series\n• Course materials\n• WhatsApp community\n• Certificate upon completion\n\nCheck your email for access details!`);
         } else {
@@ -260,9 +278,13 @@ const { courseId, courseTitle, isFree = false } = Astro.props;
         
         closeModal();
         form.reset();
+      } catch (error) {
+        console.error('Enrollment error:', error);
+        alert('Sorry, there was an error processing your enrollment. Please try again or contact us directly.');
+      } finally {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-      }, 2000);
+      }
     });
   });
   

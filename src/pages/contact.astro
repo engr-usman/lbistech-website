@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
+import FAQSection from '../components/FAQSection.astro';
 ---
 
 <Layout title="Contact Us - LbisTech Training">
@@ -26,94 +28,7 @@ import Footer from '../components/Footer.astro';
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <!-- Contact Form -->
-          <div class="bg-white p-8 rounded-2xl shadow-lg">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
-            <form class="space-y-6" id="contact-form">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                  <input 
-                    type="text" 
-                    id="firstName"
-                    name="firstName"
-                    required
-                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                  <input 
-                    type="text" 
-                    id="lastName"
-                    name="lastName"
-                    required
-                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                <input 
-                  type="email" 
-                  id="email"
-                  name="email"
-                  required
-                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                />
-              </div>
-              
-              <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                <input 
-                  type="tel" 
-                  id="phone"
-                  name="phone"
-                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                />
-              </div>
-              
-              <div>
-                <label for="course" class="block text-sm font-medium text-gray-700 mb-2">Course of Interest</label>
-                <select 
-                  id="course"
-                  name="course"
-                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                >
-                  <option value="">Select a course</option>
-                  <option value="aws-2-in-1">AWS 2 In 1</option>
-                  <option value="devops-engineering">DevOps Engineering</option>
-                  <option value="azure-2-in-1">Azure 2 In 1</option>
-                  <option value="linux-deep-dive">Linux Deep Dive</option>
-                  <option value="kubernetes">Kubernetes</option>
-                  <option value="docker">Docker</option>
-                  <option value="ansible">Ansible</option>
-                  <option value="jenkins">Jenkins</option>
-                  <option value="open-source-voip">Open Source VoIP</option>
-                  <option value="general">General Inquiry</option>
-                </select>
-              </div>
-              
-              <div>
-                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                <textarea 
-                  id="message"
-                  name="message"
-                  rows="4"
-                  required
-                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Tell us about your background and what you'd like to learn..."
-                ></textarea>
-              </div>
-              
-              <button 
-                type="submit"
-                class="w-full bg-primary-600 text-white py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+          <ContactForm />
 
           <!-- Contact Information -->
           <div class="space-y-8">
@@ -142,7 +57,7 @@ import Footer from '../components/Footer.astro';
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 mb-1">Phone</h3>
-                    <p class="text-gray-600">+92 XXX XXXXXXX</p>
+                    <p class="text-gray-600">+92 324 4280044</p>
                     <p class="text-gray-600">Available: Mon-Fri 9AM-6PM</p>
                   </div>
                 </div>
@@ -177,7 +92,7 @@ import Footer from '../components/Footer.astro';
                     Connect with fellow students and get instant support from our trainers
                   </p>
                   <a 
-                    href="https://wa.me/+92xxxxxxxxx"
+                    href="https://wa.me/+923244280044"
                     class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center space-x-2"
                   >
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -190,27 +105,7 @@ import Footer from '../components/Footer.astro';
             </div>
 
             <!-- FAQ -->
-            <div class="bg-white p-8 rounded-2xl shadow-lg">
-              <h2 class="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-              <div class="space-y-4">
-                <div>
-                  <h3 class="font-semibold text-gray-900 mb-2">What are the class timings?</h3>
-                  <p class="text-gray-600">Our live sessions are conducted on weekends (Saturday & Sunday) from 7:00 PM to 9:00 PM PST.</p>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900 mb-2">Do you provide job placement assistance?</h3>
-                  <p class="text-gray-600">Yes, we provide career guidance and job placement support to help you land your dream job.</p>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900 mb-2">Are the courses suitable for beginners?</h3>
-                  <p class="text-gray-600">Yes, we have courses designed for all skill levels, from complete beginners to advanced professionals.</p>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900 mb-2">What payment methods do you accept?</h3>
-                  <p class="text-gray-600">We accept bank transfers, online payments, and offer flexible installment plans.</p>
-                </div>
-              </div>
-            </div>
+            <FAQSection />
           </div>
         </div>
       </div>
@@ -290,26 +185,3 @@ import Footer from '../components/Footer.astro';
   </main>
   <Footer />
 </Layout>
-
-<script>
-  // Contact form handling
-  const contactForm = document.getElementById('contact-form');
-  
-  contactForm?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Simple validation
-    if (!data.firstName || !data.lastName || !data.email || !data.message) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-    
-    // Simulate form submission
-    alert('Thank you for your message! We will get back to you within 24 hours.');
-    contactForm.reset();
-  });
-</script>

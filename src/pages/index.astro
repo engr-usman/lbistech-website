@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
+import HeroSlider from '../components/HeroSlider.astro';
 import CourseCard from '../components/CourseCard.astro';
 import Footer from '../components/Footer.astro';
 import { courses } from '../data/courses.js';
@@ -12,7 +12,7 @@ const featuredCourses = courses.slice(0, 6);
 <Layout title="LbisTech - Pakistan's Leading AWS & DevOps Training Provider">
   <Header />
   <main>
-    <Hero />
+    <HeroSlider />
     
     <!-- About Section -->
     <section class="py-20 bg-gray-50">
