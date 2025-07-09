@@ -135,7 +135,7 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <script>
-  import { getContactSubmissions, getEnrollmentSubmissions, updateSubmissionStatus } from '../../lib/supabase'
+  import { getContactSubmissions, getEnrollmentSubmissions, updateSubmissionStatus } from '../../lib/database'
   
   document.addEventListener('DOMContentLoaded', async function() {
     // Tab functionality
@@ -168,9 +168,12 @@ import Footer from '../../components/Footer.astro';
   
   async function loadDashboardData() {
     try {
-      // Load contact submissions
-      const contactSubmissions = await getContactSubmissions()
-      const enrollmentSubmissions = await getEnrollmentSubmissions()
+      // Load data from PostgreSQL database via API
+      const contactResponse = await fetch('/api/admin/contacts');
+      const enrollmentResponse = await fetch('/api/admin/enrollments');
+      
+      const contactSubmissions = await contactResponse.json();
+      const enrollmentSubmissions = await enrollmentResponse.json();
       
       // Update stats
       document.getElementById('contact-count').textContent = contactSubmissions.length
