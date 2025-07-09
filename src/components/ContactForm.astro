@@ -95,8 +95,6 @@ import { submitContactForm } from '../lib/supabase'
 </div>
 
 <script>
-  import { submitContactForm } from '../lib/supabase'
-  
   // Contact form handling with Supabase database storage
   const contactForm = document.getElementById('contact-form');
   const formMessage = document.getElementById('form-message');
@@ -128,25 +126,26 @@ import { submitContactForm } from '../lib/supabase'
     submitBtn.disabled = true;
     
     try {
-      // Store in Supabase database
-      const result = await submitContactForm({
-        first_name: data.firstName,
-        last_name: data.lastName,
-        email: data.email,
-        phone: data.phone,
-        course_interest: data.course,
-        message: data.message
+      // Store in PostgreSQL database via API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
       });
       
-      if (result.success) {
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
         showMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
         contactForm.reset();
       } else {
-        throw new Error(result.error || 'Failed to send message');
+        throw new Error(result.error || 'Failed to submit form');
       }
     } catch (error) {
       console.error('Error:', error);
-      showMessage('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+      showMessage('Sorry, there was an error submitting your message. Please try again or contact us directly.', 'error');
     } finally {
       submitBtn.innerHTML = originalText;
       submitBtn.disabled = false;

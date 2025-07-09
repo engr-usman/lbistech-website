@@ -251,23 +251,19 @@ const { courseId, courseTitle, isFree = false } = Astro.props;
       submitBtn.disabled = true;
       
       try {
-        // Import Supabase function
-        const { submitEnrollmentForm } = await import('../lib/supabase');
-        
-        // Store enrollment data in Supabase database
-        const result = await submitEnrollmentForm({
-          course_id: data.courseId,
-          first_name: data.firstName,
-          last_name: data.lastName,
-          email: data.email,
-          phone: data.phone,
-          experience_level: data.experience,
-          learning_goals: data.goals,
-          is_free: data.isFree === 'true'
+        // Store enrollment data in PostgreSQL database via API
+        const response = await fetch('/api/enrollment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
         });
         
-        if (!result.success) {
-          throw new Error(result.error || 'Failed to process enrollment');
+        const result = await response.json();
+        
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || 'Failed to submit enrollment');
         }
         
         if (data.isFree === 'true') {
